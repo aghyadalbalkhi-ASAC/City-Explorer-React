@@ -45,13 +45,22 @@ body{
 /* #card-body-container .location-container-info h5{
     margin-bottom: 30%;
 } */
-.location-container{
+.location-container ,.weather-container,.movie-container  {
     margin: 2%;
     width: 100%;
     padding: 1%;
+}
+
+.card .border-warning{
+text-align: center;
 }
 
 .card-header-style{
     background-color: #ba83c4;
     color: aliceblue;
 }
+
+.card .border-warning .card-header{
+    background-color: #fcf3b5;
+}
+

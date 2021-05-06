@@ -8,7 +8,6 @@ class CityLocation extends Component {
     
         this.state = {
                 cityInfo:{}
-
         }
     }
 

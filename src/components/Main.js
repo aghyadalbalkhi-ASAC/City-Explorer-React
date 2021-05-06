@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {Form,Button,Col,InputGroup,FormControl,Container} from 'react-bootstrap'
-import CityLocation from './CityLocation'
-import Header from './Header'
-import {getCityInfo,getWeatherInfo } from '../API/API';
-
+import CityLocation from './CityLocation';
+import Weather from './Weather';
+import Movies from './Movies';
+import Header from './Header';
+import {getCityInfo,getWeatherInfo,getMoviesInfo } from '../API/API';
 
 class Main extends Component {
 
@@ -11,10 +12,14 @@ class Main extends Component {
         super(props)
     
         this.state = {
-             cityname:'',
-             show :false,
-             cityInfo:{},
-             weatherInfo:{}
+                cityname:'',
+                show :false,
+                showWeather:false,
+                showMovies:false,
+                cityInfo:{},
+                weatherInfo:[],
+                moviesInfo:[]
+
         }
     }
 
@@ -24,23 +29,33 @@ class Main extends Component {
 
     onSubmitCity = (e) =>{
         e.preventDefault();
-        this.setState({ show: true },this.getCityInfo());
+        this.setState({ show: true },()=>{this.getCityInfo()});
 
     }
 
     getCityInfo = () =>{
         getCityInfo(this.state.cityname).then(data =>{
             this.setState({
-                cityInfo: data
-            },this.getWeatherInfo());
-        })
+                cityInfo: data,
+            },() =>{this.getWeatherInfo();});
+        });
     }
 
     getWeatherInfo = () =>{
         getWeatherInfo(this.state.cityname,this.state.cityInfo).then(data =>{
             this.setState({
-                weatherInfo: data
-            },console.log(this.state.weatherInfo));
+                weatherInfo: data,
+                showWeather:true
+            },()=>{this.getMoviesInfo()});
+        })
+    }
+
+    getMoviesInfo = () =>{
+        getMoviesInfo(this.state.cityname).then(data =>{
+            this.setState({
+                moviesInfo: data,
+                showMovies:true
+            },()=>{console.log(data,'Movies Data')});
         })
     }
 
@@ -58,6 +73,12 @@ class Main extends Component {
                     </div>
                     <div className="row justify-content-center">
                         <CityLocation show={this.state.show} cityInfo={this.state.cityInfo} /> 
+                    </div>
+                    <div className="row justify-content-center">
+                        <Weather  showWeather={this.state.showWeather}  weatherInfo ={this.state.weatherInfo} /> 
+                    </div>
+                    <div className="row justify-content-center">
+                        <Movies  showMovies={this.state.showMovies}  moviesInfo ={this.state.moviesInfo} /> 
                     </div>
                 </div>
             </>
