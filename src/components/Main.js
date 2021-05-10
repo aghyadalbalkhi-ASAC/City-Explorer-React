@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form,Button,Col,InputGroup,FormControl,Container} from 'react-bootstrap'
+import {Form,Button,Jumbotron,InputGroup,FormControl,Container} from 'react-bootstrap'
 import CityLocation from './CityLocation';
 import Weather from './Weather';
 import Movies from './Movies';
@@ -97,9 +97,17 @@ class Main extends Component {
                 <div className="container">
                         <Header />
                     <br></br>
+
+                    <Jumbotron id="Jumbotron-header"  fluid >
+                    <h1 style={{color: "#7eb8da"}}>Explore the City.</h1>
+                    <p>
+                    New York is the place for me... Whay is Yours?
+                    </p>
                     <div className="row justify-content-center">
                         <SearchForm inputChange={this.inputChange} onSubmitCity={this.onSubmitCity} />
-                    </div>
+                    </div> 
+                </Jumbotron>
+
                     <div className="row justify-content-center">
                         <CityLocation show={this.state.show} cityInfo={this.state.cityInfo} /> 
                     </div>

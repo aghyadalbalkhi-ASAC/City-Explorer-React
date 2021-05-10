@@ -56,7 +56,7 @@ const CardYelp = ({yelp,key})=>{
             <Card.Footer>
                 <Button  variant="outline-info" size="lg" href={yelp.url} target>Info</Button>{' '}
                 <Card.Text className="float-right">
-                    {yelp.rating}
+                ⭐️ : {yelp.rating}
                 </Card.Text>
             </Card.Footer>
         </Card >
