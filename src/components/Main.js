@@ -4,22 +4,28 @@ import CityLocation from './CityLocation';
 import Weather from './Weather';
 import Movies from './Movies';
 import Header from './Header';
-import {getCityInfo,getWeatherInfo,getMoviesInfo } from '../API/API';
+import Trails from './Trails';
+import Yelp from './Yelp';
+import {getCityInfo,getWeatherInfo,getMoviesInfo,getTrailsInfo,getYelpInfo } from '../API/API';
 
 class Main extends Component {
 
     constructor(props) {
         super(props)
-    
         this.state = {
                 cityname:'',
                 show :false,
                 showWeather:false,
                 showMovies:false,
+                showtrails:false,
+                showYelp:false,
+                page:1,
+                active:1,
                 cityInfo:{},
                 weatherInfo:[],
-                moviesInfo:[]
-
+                moviesInfo:[],
+                trailsInfo:[],
+                yelpInfo:[]
         }
     }
 
@@ -55,14 +61,37 @@ class Main extends Component {
             this.setState({
                 moviesInfo: data,
                 showMovies:true
-            },()=>{console.log(data,'Movies Data')});
+            },()=>{this.getTrailsInfo()});
         })
     }
 
+    getTrailsInfo = () =>{
+        getTrailsInfo(this.state.cityInfo).then(data =>{
+            this.setState({
+                trailsInfo: data,
+                showtrails:true
+            },()=>{this.getYelpInfo()});
+        })
+    }
 
+    getYelpInfo = () =>{
+        getYelpInfo(this.state.page,this.state.cityname).then(data =>{
+            this.setState({
+                yelpInfo: data,
+                showYelp:true
+            },()=>{console.log(this.state.yelpInfo)});
+        })
+    }
 
-    
+    onClickPagination = (page) =>{
+        this.setState({
+            page:page,
+            active:page
+        },()=>{this.getYelpInfo()})
+    }
+
     render() {
+    
         return (
             <>
                 <div className="container">
@@ -79,6 +108,12 @@ class Main extends Component {
                     </div>
                     <div className="row justify-content-center">
                         <Movies  showMovies={this.state.showMovies}  moviesInfo ={this.state.moviesInfo} /> 
+                    </div>
+                    <div className="row justify-content-center">
+                        <Trails  showtrails={this.state.showtrails}  trailsInfo ={this.state.trailsInfo} /> 
+                    </div>
+                    <div className="row justify-content-center">
+                        <Yelp  showYelp={this.state.showYelp} active={this.state.active} onClickPagination={this.onClickPagination}  yelpInfo ={this.state.yelpInfo} /> 
                     </div>
                 </div>
             </>

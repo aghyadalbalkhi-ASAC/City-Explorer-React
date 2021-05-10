@@ -11,7 +11,7 @@ export async function getWeatherInfo (cityname,cityInfo)  {
     cityname = cityname.toLowerCase();
     const url = `https://city-explorer-api-react.herokuapp.com/weather?searchQuery=${cityname}&lat=${cityInfo.lat}&lon=${cityInfo.lon}`;
     const req = await axios.get(url);
-    const threeDays =[req.data[0],req.data[1],req.data[2]];
+    const threeDays =[req.data[0],req.data[1],req.data[2],req.data[3]];
     return threeDays;
 
 }
@@ -25,6 +25,30 @@ export async function getMoviesInfo (cityname)  {
     return moviesData;
 
 }
+
+export async function getTrailsInfo(cityInfo)  {
+
+    const url = `https://city-explorer-api-react.herokuapp.com/trails?lat=${cityInfo.lat}&lon=${cityInfo.lon}`;
+    const req = await axios.get(url);
+    const trailsData =req.data;
+
+    return trailsData;
+
+}
+
+
+export async function getYelpInfo(page,cityname)  {
+
+    const url = `https://city-explorer-api-react.herokuapp.com/yelp?page=${page}&cityname=${cityname}`;
+    const req = await axios.get(url);
+    const yelpData =req.data;
+    
+    return yelpData;
+
+}
+
+
+
 
 
 

@@ -45,7 +45,7 @@ body{
 /* #card-body-container .location-container-info h5{
     margin-bottom: 30%;
 } */
-.location-container ,.weather-container,.movie-container  {
+.location-container ,.weather-container,.movie-container ,.trail-container  {
     margin: 2%;
     width: 100%;
     padding: 1%;
@@ -64,3 +64,18 @@ text-align: center;
     background-color: #fcf3b5;
 }
 
+.wrap-cards {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1%;
+}
+
+.wrap-cards div{
+    margin: 1%;
+}
+
+#pagination{
+    width: 25%;
+    margin: 0 auto;
+}
