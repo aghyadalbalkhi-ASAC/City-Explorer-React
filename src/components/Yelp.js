@@ -78,7 +78,7 @@ const PaginationBasic = ({props}) =>{
     }
     return (
         <div id='pagination'>
-            <Pagination size="lg">{items}</Pagination>
+            <Pagination >{items}</Pagination>
         </div>
     );
 }
